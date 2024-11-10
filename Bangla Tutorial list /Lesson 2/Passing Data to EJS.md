@@ -1,50 +1,50 @@
-Passing data to **EJS** involves sending dynamic information from your **Node.js** server to an **EJS template** to render personalized content. 
+**Node.js** থেকে **EJS** টেম্পলেটে ডেটা পাঠানোর মাধ্যমে আপনি ব্যবহারকারীর জন্য ডায়নামিক কন্টেন্ট প্রদর্শন করতে পারেন। এখানে ধাপে ধাপে নির্দেশনা দেওয়া হলো।
 
 ---
 
-### Step 1: Setting Up the Server to Pass Data
+### ধাপ ১: সার্ভারে ডেটা সেটআপ করা
 
-In your Node.js file (e.g., `server.js`), set up a route and send data to the EJS template using `res.render()`.
+আপনার Node.js ফাইলে (যেমন `server.js`) একটি রাউট তৈরি করুন এবং `res.render()` ব্যবহার করে ডেটা EJS টেম্পলেটে পাঠান।
 
 ```javascript
 // server.js
 const express = require('express');
 const app = express();
 
-// Set EJS as the templating engine
+// EJS কে টেম্পলেট ইঞ্জিন হিসেবে সেট করুন
 app.set('view engine', 'ejs');
 
-// Route to render an EJS template and pass data
+// একটি রাউট তৈরি করুন এবং ডেটা পাঠান
 app.get('/', (req, res) => {
   const data = {
     name: 'Nadib',
     age: 25,
-    hobbies: ['Coding', 'Reading', 'Gaming']
+    hobbies: ['কোডিং', 'পড়াশোনা', 'গেমিং']
   };
-  res.render('profile', data); // Render profile.ejs with the data object
+  res.render('profile', data); // profile.ejs-এ data অবজেক্ট পাঠান
 });
 
-// Start the server
+// সার্ভার চালু করুন
 app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+  console.log('সার্ভার চালু হয়েছে http://localhost:3000 তে');
 });
 ```
 
-- Here, an object `data` is created with `name`, `age`, and `hobbies` and passed to the EJS template named `profile.ejs`.
+- এখানে একটি অবজেক্ট `data` তৈরি করা হয়েছে, যাতে `name`, `age`, এবং `hobbies` রয়েছে। এই অবজেক্টটি `profile.ejs` নামে EJS টেম্পলেটে পাঠানো হচ্ছে।
 
 ---
 
-### Step 2: Accessing Data in the EJS Template
+### ধাপ ২: EJS টেম্পলেটে ডেটা অ্যাক্সেস করা
 
-In your `views` folder, create an `EJS` file (e.g., `profile.ejs`) to receive and display the data.
+আপনার `views` ফোল্ডারে একটি EJS ফাইল (যেমন `profile.ejs`) তৈরি করুন, যা ডেটা গ্রহণ করবে এবং প্রদর্শন করবে।
 
 ```html
 <!-- profile.ejs -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <title>User Profile</title>
+  <title>ব্যবহারকারীর প্রোফাইল</title>
 </head>
 <body>
   <h1>স্বাগতম, <%= name %>!</h1>
@@ -60,19 +60,19 @@ In your `views` folder, create an `EJS` file (e.g., `profile.ejs`) to receive an
 </html>
 ```
 
-- **Explanation**:
-  - `<%= name %>`: Displays the user’s name (e.g., "Nadib").
-  - `<%= age %>`: Displays the age (e.g., 25).
-  - `<% hobbies.forEach(hobby => { %> ... <% }); %>`: Loops through the `hobbies` array and displays each hobby in an `<li>` element.
+- **ব্যাখ্যা**:
+  - `<%= name %>`: ব্যবহারকারীর নাম প্রদর্শন করবে (যেমন, "Nadib")।
+  - `<%= age %>`: ব্যবহারকারীর বয়স দেখাবে (যেমন, ২৫)।
+  - `<% hobbies.forEach(hobby => { %> ... <% }); %>`: `hobbies` এর প্রতিটি আইটেমকে `<li>` এ প্রদর্শন করবে।
 
 ---
 
-### Summary of Steps
+### সংক্ষেপে ধাপসমূহ
 
-1. **Define data** in your Node.js server route.
-2. **Pass the data** to `res.render()` when rendering the EJS template.
-3. **Access data** in the EJS template using `<%= %>` for variables and `<% %>` for JavaScript control structures.
+1. **সার্ভারে ডেটা** সংজ্ঞায়িত করুন।
+2. **res.render()** এর মাধ্যমে ডেটা EJS টেম্পলেটে পাঠান।
+3. **EJS টেম্পলেটে ডেটা** `<%= %>` দিয়ে প্রদর্শন করুন এবং `<% %>` দিয়ে জাভাস্ক্রিপ্ট কোড ব্যবহার করুন।
 
 ---
 
-This method allows you to display personalized, dynamic content on your pages by passing data from Node.js to EJS.
+এই পদ্ধতি ব্যবহার করে আপনি Node.js থেকে EJS-এ ডেটা পাঠিয়ে ডায়নামিক কন্টেন্ট সহজেই প্রদর্শন করতে পারেন।
